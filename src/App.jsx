@@ -21,21 +21,48 @@ function App() {
   const handleKeyDown = ({ key }) => {
     if (key === " " && text.trim().length > 0) {
       if (text.trim() === words[backspaceCount].text) {
-        console.log(text);
+        let changedWords = words.map((word, wordID) => {
+          if (backspaceCount === wordID) {
+            return { ...word, isCorrect: true };
+          } else {
+            return word;
+          }
+        });
+        setWords(changedWords);
         setBackspaceCount(backspaceCount + 1);
       } else {
-        console.log("wrong text");
+        let changedWords = words.map((word, wordID) => {
+          if (backspaceCount === wordID) {
+            return { ...word, isCorrect: false };
+          } else {
+            return word;
+          }
+        });
+        setWords(changedWords);
         setBackspaceCount(backspaceCount + 1);
       }
       setText("");
     }
   };
 
+  const checkColor = (object) => {
+    if (object.isCorrect === null) return "white";
+    if (object.isCorrect) return "green";
+    if (!object.isCorrect) return "red";
+  };
+
   return (
     <>
       <div style={{ marginBottom: "20px" }}>
         {words.map((word, wordID) => (
-          <span style={{ fontSize: "24px", marginLeft: "10px" }} key={wordID}>
+          <span
+            style={{
+              fontSize: "24px",
+              marginLeft: "10px",
+              color: checkColor(word),
+            }}
+            key={wordID}
+          >
             {word.text}
           </span>
         ))}
