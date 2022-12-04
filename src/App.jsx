@@ -1,47 +1,37 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { allWords } from "./words.js";
 import "./App.css";
 
 function App() {
-  const [words, setWords] = useState([
-    { text: "behind", isCorrect: null },
-    { text: "go", isCorrect: null },
-    { text: "get", isCorrect: null },
-    { text: "done", isCorrect: null },
-    { text: "finish", isCorrect: null },
-    { text: "relate", isCorrect: null },
-    { text: "family", isCorrect: null },
-    { text: "refresh", isCorrect: null },
-    { text: "run", isCorrect: null },
-    { text: "solid", isCorrect: null },
-  ]);
-  const [text, setText] = useState("");
-  const [backspaceCount, setBackspaceCount] = useState(0);
+  const [words, setWords] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [wordCount, setWordCount] = useState(0);
 
   const handleKeyDown = ({ key }) => {
-    if (key === " " && text.trim().length > 0) {
-      if (text.trim() === words[backspaceCount].text) {
+    if (key === " " && userInput.trim().length > 0) {
+      if (userInput.trim() === words[wordCount].text) {
         let changedWords = words.map((word, wordID) => {
-          if (backspaceCount === wordID) {
+          if (wordCount === wordID) {
             return { ...word, isCorrect: true };
           } else {
             return word;
           }
         });
         setWords(changedWords);
-        setBackspaceCount(backspaceCount + 1);
+        setWordCount(wordCount + 1);
       } else {
         let changedWords = words.map((word, wordID) => {
-          if (backspaceCount === wordID) {
+          if (wordCount === wordID) {
             return { ...word, isCorrect: false };
           } else {
             return word;
           }
         });
         setWords(changedWords);
-        setBackspaceCount(backspaceCount + 1);
+        setWordCount(wordCount + 1);
       }
-      setText("");
+      setUserInput("");
     }
   };
 
@@ -51,14 +41,17 @@ function App() {
     if (!object.isCorrect) return "red";
   };
 
+  useEffect(() => {
+    setWords(allWords);
+  }, [allWords]);
+
   return (
-    <>
-      <div style={{ marginBottom: "20px" }}>
+    <div className="type-container">
+      <div className="word-container">
         {words.map((word, wordID) => (
           <span
+            className="words"
             style={{
-              fontSize: "24px",
-              marginLeft: "10px",
               color: checkColor(word),
             }}
             key={wordID}
@@ -68,12 +61,18 @@ function App() {
         ))}
       </div>
       <input
-        style={{ width: "250px", height: "40px", fontSize: "20px" }}
-        value={text}
-        onChange={(event) => setText(event.target.value)}
+        className="word-input"
+        style={{
+          width: "250px",
+          height: "40px",
+          fontSize: "20px",
+          alignSelf: "start",
+        }}
+        value={userInput}
+        onChange={(event) => setUserInput(event.target.value)}
         onKeyDown={handleKeyDown}
       />
-    </>
+    </div>
   );
 }
 
