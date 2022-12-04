@@ -24,11 +24,17 @@
 
 .words {
   font-size: 24px;
-  margin-right: 8px;
+  letter-spacing: 2px;
+  line-height: 2;
+  margin-right: 10px;
   font-family: Roboto Mono;
   font-weight: 500;
 }
 
 .word-input {
-  margin-left: 184px;
+  margin-left: 186px;
+  background-color: #6d9886;
+  border-radius: 2px;
+  padding: 1rem 0.5rem 1rem;
+  color: white;
 }

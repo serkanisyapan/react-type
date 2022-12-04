@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { allWords } from "./words.js";
 import "./App.css";
 
@@ -7,6 +6,7 @@ function App() {
   const [words, setWords] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const focusRef = useRef(null);
 
   const handleKeyDown = ({ key }) => {
     if (key === " " && userInput.trim().length > 0) {
@@ -37,12 +37,13 @@ function App() {
 
   const checkColor = (object) => {
     if (object.isCorrect === null) return "white";
-    if (object.isCorrect) return "green";
-    if (!object.isCorrect) return "red";
+    if (object.isCorrect) return "#38E54D";
+    if (!object.isCorrect) return "#D2001A";
   };
 
   useEffect(() => {
     setWords(allWords);
+    focusRef.current.focus();
   }, [allWords]);
 
   return (
@@ -61,6 +62,7 @@ function App() {
         ))}
       </div>
       <input
+        ref={focusRef}
         className="word-input"
         style={{
           width: "250px",
