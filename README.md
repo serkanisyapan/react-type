@@ -6,3 +6,4 @@ TODOS:
 - Get new words every turn
 - Add counter for correct and false typed words
 - Add wpm when run ends
+- Add scrolling instead of showing all words at once
