@@ -7,11 +7,13 @@ function App() {
   const [words, setWords] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const [showRestartTurn, setShowRestartTurn] = useState(false);
   const focusRef = useRef(null);
 
-  const handleKeyDown = ({ key }) => {
-    if (key === " " && userInput.trim().length > 0) {
+  const handleKeyDown = (event) => {
+    if (event.key === " " && userInput.trim().length > 0) {
       if (userInput.trim() === words[wordCount].text) {
+        event.preventDefault();
         let changedWords = words.map((word, wordID) => {
           if (wordCount === wordID) {
             return { ...word, isCorrect: true };
@@ -51,7 +53,7 @@ function App() {
     return randomWords;
   };
 
-  const wordCountBoard = `${wordCount}/${words.length}` 
+  const wordCountBoard = `${wordCount}/${words.length}`;
 
   const refreshTurn = () => {
     setWordCount(0);
@@ -94,9 +96,15 @@ function App() {
         onChange={(event) => setUserInput(event.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={refreshTurn} className="refresh-button">
+      <button
+        onMouseOver={() => setShowRestartTurn(true)}
+        onMouseOut={() => setShowRestartTurn(false)}
+        onClick={refreshTurn}
+        className="refresh-button"
+      >
         <img src={refreshImage} alt="new turn button" />
       </button>
+      {showRestartTurn && <div className="restart-text">Restart Turn</div>}
     </div>
   );
 }

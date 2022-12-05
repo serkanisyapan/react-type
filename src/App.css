@@ -13,6 +13,7 @@
   justify-content: center;
   align-items: center;
   max-width: 90%;
+  vertical-align: top;
 }
 
 .word-container {
@@ -69,6 +70,17 @@
 .refresh-button img {
   width: 30px;
   height: 30px;
+}
+
+.restart-text {
+  padding: 7px;
+  font-family: Roboto Mono;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.597);
+  color: white;
+  position: absolute;
+  left: 600px;
+  top: 500px;
 }
 
 .refresh-button:hover {
