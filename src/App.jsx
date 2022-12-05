@@ -41,8 +41,17 @@ function App() {
     if (!object.isCorrect) return "#D2001A";
   };
 
+  const pickRandom30Words = (array) => {
+    let randomWords = [];
+    for (let i = 0; i < 30; i++) {
+      let pickWord = array[Math.floor(Math.random() * array.length)];
+      randomWords.push(pickWord);
+    }
+    return randomWords;
+  };
+
   useEffect(() => {
-    setWords(allWords);
+    setWords(pickRandom30Words(allWords));
     focusRef.current.focus();
   }, [allWords]);
 
@@ -74,6 +83,7 @@ function App() {
         onChange={(event) => setUserInput(event.target.value)}
         onKeyDown={handleKeyDown}
       />
+      <button>Refresh</button>
     </div>
   );
 }
