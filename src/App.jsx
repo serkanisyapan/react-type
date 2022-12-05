@@ -55,6 +55,9 @@ function App() {
 
   const wordCountBoard = `${wordCount}/${words.length}`;
 
+  const correctWords = words.filter((word) => word.isCorrect === true).length;
+  const wrongWords = words.filter((word) => word.isCorrect === false).length;
+
   const refreshTurn = () => {
     setWordCount(0);
     setUserInput("");
@@ -64,8 +67,11 @@ function App() {
 
   useEffect(() => {
     setWords(pickRandom30Words(allWords));
+    console.log(correctWords);
     focusRef.current.focus();
   }, [allWords]);
+
+  useEffect(() => {}, [words]);
 
   return (
     <div className="type-container">
@@ -83,19 +89,26 @@ function App() {
           </span>
         ))}
       </div>
-      <input
-        ref={focusRef}
-        className="word-input"
-        style={{
-          width: "250px",
-          height: "40px",
-          fontSize: "20px",
-          alignSelf: "start",
-        }}
-        value={userInput}
-        onChange={(event) => setUserInput(event.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+      <div className="input-container">
+        <input
+          ref={focusRef}
+          className="word-input"
+          style={{
+            width: "250px",
+            height: "40px",
+            fontSize: "20px",
+            alignSelf: "start",
+          }}
+          value={userInput}
+          onKeyDown={handleKeyDown}
+          onChange={(event) => setUserInput(event.target.value)}
+        />
+        <div className="correct-wrong">
+          <span style={{ color: "#38E54D" }}>{correctWords}</span>
+          <span style={{ color: "white" }}>|</span>
+          <span style={{ color: "#D2001A" }}>{wrongWords}</span>
+        </div>
+      </div>
       <button
         onMouseOver={() => setShowRestartTurn(true)}
         onMouseOut={() => setShowRestartTurn(false)}

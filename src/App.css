@@ -34,7 +34,6 @@
 }
 
 .word-input {
-  margin-left: 186px;
   background-color: #6d9886;
   border-radius: 2px;
   padding: 1rem 0.5rem 1rem;
@@ -42,6 +41,14 @@
   font-weight: bold;
   letter-spacing: 1.5px;
   font-family: Roboto Mono;
+}
+
+.input-container {
+  margin-left: 187px;
+  align-self: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .refresh-button {
@@ -65,6 +72,14 @@
   font-size: 26px;
   color: #f49d1a;
   margin-bottom: 10px;
+}
+
+.correct-wrong {
+  font-family: Roboto Mono;
+  font-size: 26px;
+  margin-left: 50px;
+  background-color: rgba(0, 0, 0, 0.155);
+  padding: 5px 25px;
 }
 
 .refresh-button img {
