@@ -42,3 +42,24 @@
   letter-spacing: 1.5px;
   font-family: Roboto Mono;
 }
+
+.refresh-button {
+  background-color: transparent;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  transition: all 1s ease-in-out;
+}
+
+.refresh-button img {
+  width: 30px;
+  height: 30px;
+  rotate: 0deg;
+}
+
+.refresh-button:hover {
+  transform: rotate(360deg);
+}

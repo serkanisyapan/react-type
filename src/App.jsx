@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { allWords } from "./words.js";
+import refreshImage from "./assets/refresh-image.png";
 import "./App.css";
 
 function App() {
@@ -50,6 +51,13 @@ function App() {
     return randomWords;
   };
 
+  const refreshTurn = () => {
+    setWordCount(0)
+    setUserInput("")
+    setWords(pickRandom30Words(allWords))
+    focusRef.current.focus()
+  }
+
   useEffect(() => {
     setWords(pickRandom30Words(allWords));
     focusRef.current.focus();
@@ -83,7 +91,9 @@ function App() {
         onChange={(event) => setUserInput(event.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button>Refresh</button>
+      <button onClick={refreshTurn} className="refresh-button">
+        <img src={refreshImage} alt="new turn button" />
+      </button>
     </div>
   );
 }
