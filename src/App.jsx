@@ -54,7 +54,6 @@ function App() {
   };
 
   const wordCountBoard = `${wordCount}/${words.length}`;
-
   const correctWords = words.filter((word) => word.isCorrect === true).length;
   const wrongWords = words.filter((word) => word.isCorrect === false).length;
 
@@ -71,8 +70,6 @@ function App() {
     focusRef.current.focus();
   }, [allWords]);
 
-  useEffect(() => {}, [words]);
-
   return (
     <div className="type-container">
       <span className="word-count-board">{wordCountBoard}</span>
@@ -82,6 +79,8 @@ function App() {
             className="words"
             style={{
               color: checkColor(word),
+              backgroundColor:
+                wordID === wordCount ? "rgba(0, 0, 0, 0.274)" : "",
             }}
             key={wordID}
           >
