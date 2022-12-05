@@ -44,6 +44,7 @@
 }
 
 .refresh-button {
+  margin-top: 20px;
   background-color: transparent;
   background-size: cover;
   background-repeat: no-repeat;
@@ -52,14 +53,24 @@
   overflow: hidden;
   outline: none;
   transition: all 1s ease-in-out;
+  border-radius: 50%;
+  display: flex;
+}
+
+.word-count-board {
+  align-self: start;
+  margin-left: 186px;
+  font-family: Roboto Mono;
+  font-size: 26px;
+  color: #f49d1a;
+  margin-bottom: 10px;
 }
 
 .refresh-button img {
   width: 30px;
   height: 30px;
-  rotate: 0deg;
 }
 
 .refresh-button:hover {
-  transform: rotate(360deg);
+  transform: rotate(-360deg);
 }

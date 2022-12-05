@@ -51,12 +51,14 @@ function App() {
     return randomWords;
   };
 
+  const wordCountBoard = `${wordCount}/${words.length}` 
+
   const refreshTurn = () => {
-    setWordCount(0)
-    setUserInput("")
-    setWords(pickRandom30Words(allWords))
-    focusRef.current.focus()
-  }
+    setWordCount(0);
+    setUserInput("");
+    setWords(pickRandom30Words(allWords));
+    focusRef.current.focus();
+  };
 
   useEffect(() => {
     setWords(pickRandom30Words(allWords));
@@ -65,6 +67,7 @@ function App() {
 
   return (
     <div className="type-container">
+      <span className="word-count-board">{wordCountBoard}</span>
       <div className="word-container">
         {words.map((word, wordID) => (
           <span
