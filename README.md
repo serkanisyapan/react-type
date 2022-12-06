@@ -1,8 +1,8 @@
 Fast typing test to see how fast you can type
 
-- TODOS:
+TODOS:
 
-- [x]Add indicator to let typer see which word they are typing currently
+- [x] Add indicator to let typer see which word they are typing currently
 - [x] Add counter for how many words already been typed
 - [x] User can start new turn
 - [x] Get new words every turn

@@ -1,59 +1,51 @@
 import { useState, useEffect, useRef } from "react";
 import { allWords } from "./words.js";
+import { pickRandom30Words } from "./utils/pickRandom30Words.js";
+import { checkWordColor } from "./utils/checkWordColor.js";
+import { Word } from "./Word.jsx";
 import refreshImage from "./assets/refresh-image.png";
 import "./App.css";
 
-function App() {
+export const App = () => {
   const [words, setWords] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [showRestartTurn, setShowRestartTurn] = useState(false);
   const focusRef = useRef(null);
 
+  const checkIsWordCorrect = (input, array, count) => {
+    if (input === array[count].text) {
+      const changedWords = array.map((item, itemID) => {
+        if (count === itemID) {
+          return { ...item, isCorrect: true };
+        }
+        return item;
+      });
+      setWords(changedWords);
+    } else {
+      const changedWords = array.map((item, itemID) => {
+        if (count === itemID) {
+          return { ...item, isCorrect: false };
+        }
+        return item;
+      });
+      setWords(changedWords);
+    }
+    setWordCount(wordCount + 1);
+    setUserInput("");
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === " " && userInput.trim().length > 0) {
       event.preventDefault();
-      if (userInput.trim() === words[wordCount].text) {
-        let changedWords = words.map((word, wordID) => {
-          if (wordCount === wordID) {
-            return { ...word, isCorrect: true };
-          } else {
-            return word;
-          }
-        });
-        setWords(changedWords);
-        setWordCount(wordCount + 1);
-      } else {
-        let changedWords = words.map((word, wordID) => {
-          if (wordCount === wordID) {
-            return { ...word, isCorrect: false };
-          } else {
-            return word;
-          }
-        });
-        setWords(changedWords);
-        setWordCount(wordCount + 1);
-      }
-      setUserInput("");
+      checkIsWordCorrect(userInput, words, wordCount);
     }
   };
-
-  const checkColor = (object) => {
-    if (object.isCorrect === null) return "white";
-    if (object.isCorrect) return "#38E54D";
-    if (!object.isCorrect) return "#D2001A";
+  const handleOnChange = (event) => {
+    setUserInput(event.target.value);
   };
 
-  const pickRandom30Words = (array) => {
-    let randomWords = [];
-    for (let i = 0; i < 30; i++) {
-      let pickWord = array[Math.floor(Math.random() * array.length)];
-      randomWords.push(pickWord);
-    }
-    return randomWords;
-  };
-
-  const wordCountBoard = `${wordCount}/${words.length}`;
+  const typedWordCount = `${wordCount}/${words.length}`;
   const correctWords = words.filter((word) => word.isCorrect === true).length;
   const wrongWords = words.filter((word) => word.isCorrect === false).length;
 
@@ -66,26 +58,21 @@ function App() {
 
   useEffect(() => {
     setWords(pickRandom30Words(allWords));
-    console.log(correctWords);
     focusRef.current.focus();
   }, [allWords]);
 
   return (
     <div className="type-container">
-      <span className="word-count-board">{wordCountBoard}</span>
+      <span className="word-count-board">{typedWordCount}</span>
       <div className="word-container">
         {words.map((word, wordID) => (
-          <span
-            className="words"
-            style={{
-              color: checkColor(word),
-              backgroundColor:
-                wordID === wordCount ? "rgba(0, 0, 0, 0.274)" : "",
-            }}
-            key={wordID}
-          >
-            {word.text}
-          </span>
+          <Word
+            word={word}
+            wordClass="words"
+            wordID={wordID}
+            wordCount={wordCount}
+            checkWordColor={checkWordColor}
+          />
         ))}
       </div>
       <div className="input-container">
@@ -94,7 +81,7 @@ function App() {
           className="word-input"
           value={userInput}
           onKeyDown={handleKeyDown}
-          onChange={(event) => setUserInput(event.target.value)}
+          onChange={handleOnChange}
         />
         <div className="correct-wrong">
           <span style={{ color: "#38E54D" }}>{correctWords}</span>
@@ -113,6 +100,4 @@ function App() {
       {showRestartTurn && <div className="restart-text">Restart Turn</div>}
     </div>
   );
-}
-
-export default App;
+};

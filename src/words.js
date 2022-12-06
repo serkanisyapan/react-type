@@ -212,7 +212,6 @@ export const allWords = [
   { text: "shell", isCorrect: null },
   { text: "sharp", isCorrect: null },
   { text: "drill", isCorrect: null },
-  { text: "ex", isCorrect: null },
   { text: "go", isCorrect: null },
   { text: "as", isCorrect: null },
   { text: "is", isCorrect: null },
