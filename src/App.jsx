@@ -12,8 +12,8 @@ function App() {
 
   const handleKeyDown = (event) => {
     if (event.key === " " && userInput.trim().length > 0) {
+      event.preventDefault();
       if (userInput.trim() === words[wordCount].text) {
-        event.preventDefault();
         let changedWords = words.map((word, wordID) => {
           if (wordCount === wordID) {
             return { ...word, isCorrect: true };
@@ -92,12 +92,6 @@ function App() {
         <input
           ref={focusRef}
           className="word-input"
-          style={{
-            width: "250px",
-            height: "40px",
-            fontSize: "20px",
-            alignSelf: "start",
-          }}
           value={userInput}
           onKeyDown={handleKeyDown}
           onChange={(event) => setUserInput(event.target.value)}
