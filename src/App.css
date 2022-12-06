@@ -46,6 +46,10 @@
   font-size: 20px;
 }
 
+.word-input:disabled {
+  cursor: not-allowed;
+}
+
 .input-container {
   margin-left: 187px;
   align-self: start;
@@ -80,8 +84,7 @@
 .correct-wrong {
   font-family: Roboto Mono;
   font-size: 26px;
-  margin-left: 30px;
-  background-color: rgba(0, 0, 0, 0.155);
+  margin-left: 25px;
   padding: 5px 25px;
 }
 
@@ -99,6 +102,13 @@
   position: absolute;
   left: 600px;
   top: 500px;
+}
+
+.timer {
+  font-size: 28px;
+  font-family: Roboto Mono;
+  color: #f49d1a;
+  margin-left: 25px;
 }
 
 .refresh-button:hover {
