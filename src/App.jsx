@@ -2,15 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { allWords } from "./words.js";
 import { pickRandom30Words } from "./utils/pickRandom30Words.js";
 import { checkWordColor } from "./utils/checkWordColor.js";
-import { Word } from "./Word.jsx";
+import { Word } from "./components/Word.jsx";
+import { Timer } from "./components/Timer.jsx";
+import { CountTable } from "./components/CountTable.jsx";
 import refreshImage from "./assets/refresh-image.png";
 import "./App.css";
-import { Timer } from "./Timer.jsx";
 
 export const App = () => {
   const [words, setWords] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const [keyStrokes, setKeyStrokes] = useState(0);
   const [showRestartTurn, setShowRestartTurn] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
@@ -44,6 +46,11 @@ export const App = () => {
       event.preventDefault();
       checkIsWordCorrect(userInput, words, wordCount);
     }
+    if (event.key === "Backspace") {
+      return;
+    } else {
+      setKeyStrokes(keyStrokes + 1);
+    }
   };
 
   const handleOnChange = (event) => {
@@ -60,8 +67,6 @@ export const App = () => {
   };
 
   const typedWordCount = `${wordCount}/${words.length}`;
-  const correctWords = words.filter((word) => word.isCorrect === true).length;
-  const wrongWords = words.filter((word) => word.isCorrect === false).length;
 
   const refreshTurn = () => {
     setWordCount(0);
@@ -83,7 +88,10 @@ export const App = () => {
 
   return (
     <div className="type-container">
-      <span className="word-count-board">{typedWordCount}</span>
+      <div className="scores">
+        <span className="word-count-board">{typedWordCount}</span>
+        <CountTable tableClass="correct-wrong" words={words} />
+      </div>
       <div className="word-container">
         {words.map((word, wordID) => (
           <Word
@@ -110,11 +118,6 @@ export const App = () => {
           isGameStarted={isGameStarted}
           timerReset={resetTimer}
         />
-        <div className="correct-wrong">
-          <span style={{ color: "#38E54D" }}>{correctWords}</span>
-          <span style={{ color: "white" }}>|</span>
-          <span style={{ color: "#D2001A" }}>{wrongWords}</span>
-        </div>
       </div>
       <button
         onMouseOver={() => setShowRestartTurn(true)}

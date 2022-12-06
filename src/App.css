@@ -74,18 +74,15 @@
 
 .word-count-board {
   align-self: start;
-  margin-left: 186px;
   font-family: Roboto Mono;
   font-size: 26px;
   color: #f49d1a;
-  margin-bottom: 10px;
 }
 
 .correct-wrong {
   font-family: Roboto Mono;
   font-size: 26px;
-  margin-left: 25px;
-  padding: 5px 25px;
+  margin-left: 20px;
 }
 
 .refresh-button img {
@@ -109,6 +106,15 @@
   font-family: Roboto Mono;
   color: #f49d1a;
   margin-left: 25px;
+}
+
+.scores {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+  margin-left: 187px;
+  margin-bottom: 20px;
 }
 
 .refresh-button:hover {
