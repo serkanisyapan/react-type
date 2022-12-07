@@ -48,12 +48,15 @@ export const Timer = ({
 
   return (
     <p className={timerClass}>
-      <span className="minutes">0{minutes}</span>:
+      <span>{WPM()} WPM</span>
+      <span style={{ marginLeft: "30px" }} className="minutes">
+        0{minutes}
+      </span>
+      :
       <span className="seconds">
         {isBiggerThanNine}
         {seconds}
       </span>
-      <span style={{ marginLeft: "20px" }}>{WPM()} WPM</span>
     </p>
   );
 };

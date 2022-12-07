@@ -5,7 +5,6 @@ import { checkWordColor } from "./utils/checkWordColor.js";
 import { calculateWPM } from "./utils/calculateWPM.js";
 import { Word } from "./components/Word.jsx";
 import { Timer } from "./components/Timer.jsx";
-import { CountTable } from "./components/CountTable.jsx";
 import refreshImage from "./assets/refresh-image.png";
 import "./App.css";
 
@@ -92,7 +91,6 @@ export const App = () => {
     <div className="type-container">
       <div className="scores">
         <span className="word-count-board">{typedWordCount}</span>
-        <CountTable tableClass="correct-wrong" words={words} />
       </div>
       <div className="word-container">
         {words.map((word, wordID) => (

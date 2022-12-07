@@ -12,16 +12,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 90%;
-  vertical-align: top;
+  max-width: 70%;
 }
 
 .word-container {
   margin-bottom: 20px;
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  overflow: hidden;
+}
+
+.word-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .words {
@@ -34,10 +37,8 @@
 }
 
 .word-input {
-  background-color: #6d9886;
   border-radius: 2px;
   padding: 1rem 0.5rem 1rem;
-  color: white;
   font-weight: bold;
   letter-spacing: 1.5px;
   font-family: Roboto Mono;
@@ -51,10 +52,9 @@
 }
 
 .input-container {
-  margin-left: 187px;
   align-self: start;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -76,7 +76,7 @@
   align-self: start;
   font-family: Roboto Mono;
   font-size: 26px;
-  color: #f49d1a;
+  color: #fe6f27;
 }
 
 .correct-wrong {
@@ -104,7 +104,7 @@
 .timer {
   font-size: 28px;
   font-family: Roboto Mono;
-  color: #f49d1a;
+  color: #fe6f27;
   margin-left: 25px;
 }
 
@@ -113,7 +113,6 @@
   align-items: center;
   justify-content: center;
   align-self: start;
-  margin-left: 187px;
   margin-bottom: 20px;
 }
 
