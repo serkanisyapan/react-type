@@ -1,6 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 
-export const Timer = ({ isGameStarted, timerReset, timerClass }) => {
+export const Timer = ({
+  isGameStarted,
+  timerReset,
+  timerClass,
+  calculateWPM,
+  keyStrokes,
+}) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const timerInterval = useRef(null);
@@ -23,6 +29,14 @@ export const Timer = ({ isGameStarted, timerReset, timerClass }) => {
     clearInterval(timerInterval.current);
   };
 
+  const WPM = () => {
+    if (seconds === 0) {
+      return calculateWPM(keyStrokes, 1);
+    } else {
+      return calculateWPM(keyStrokes, seconds);
+    }
+  };
+
   useEffect(() => {
     if (isGameStarted) {
       newTimer();
@@ -39,6 +53,7 @@ export const Timer = ({ isGameStarted, timerReset, timerClass }) => {
         {isBiggerThanNine}
         {seconds}
       </span>
+      <span style={{ marginLeft: "20px" }}>{WPM()} WPM</span>
     </p>
   );
 };

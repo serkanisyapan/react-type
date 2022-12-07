@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { allWords } from "./words.js";
 import { pickRandom30Words } from "./utils/pickRandom30Words.js";
 import { checkWordColor } from "./utils/checkWordColor.js";
+import { calculateWPM } from "./utils/calculateWPM.js";
 import { Word } from "./components/Word.jsx";
 import { Timer } from "./components/Timer.jsx";
 import { CountTable } from "./components/CountTable.jsx";
@@ -47,7 +48,7 @@ export const App = () => {
       checkIsWordCorrect(userInput, words, wordCount);
     }
     if (event.key === "Backspace") {
-      return;
+      setKeyStrokes(keyStrokes - 1);
     } else {
       setKeyStrokes(keyStrokes + 1);
     }
@@ -73,6 +74,7 @@ export const App = () => {
     setUserInput("");
     setIsGameOver(false);
     setResetTimer(true);
+    setKeyStrokes(0);
     setWords(pickRandom30Words(allWords));
     focusRef.current.focus();
   };
@@ -117,6 +119,8 @@ export const App = () => {
           timerClass="timer"
           isGameStarted={isGameStarted}
           timerReset={resetTimer}
+          calculateWPM={calculateWPM}
+          keyStrokes={keyStrokes}
         />
       </div>
       <button
@@ -127,7 +131,7 @@ export const App = () => {
       >
         <img src={refreshImage} alt="new turn button" />
       </button>
-      {showRestartTurn && <div className="restart-text">Restart Turn</div>}
+      {showRestartTurn && <div className="restart-text">New Run</div>}
     </div>
   );
 };
