@@ -59,7 +59,7 @@
 }
 
 .refresh-button {
-  margin-top: 20px;
+  margin-top: 35px;
   background-color: transparent;
   background-size: cover;
   background-repeat: no-repeat;
@@ -117,5 +117,5 @@
 }
 
 .refresh-button:hover {
-  transform: rotate(-360deg);
+  transform: rotate(360deg);
 }

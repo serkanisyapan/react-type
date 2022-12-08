@@ -6,6 +6,7 @@ export const Timer = ({
   timerClass,
   calculateWPM,
   keyStrokes,
+  isGameOver,
 }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -40,6 +41,9 @@ export const Timer = ({
   useEffect(() => {
     if (isGameStarted) {
       newTimer();
+    }
+    if (isGameOver) {
+      clearInterval(timerInterval.current);
     }
     if (timerReset) {
       resetTimer();

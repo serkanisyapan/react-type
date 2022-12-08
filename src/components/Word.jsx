@@ -10,7 +10,7 @@ export const Word = ({
       className={wordClass}
       style={{
         color: checkWordColor(word),
-        backgroundColor: wordID === wordCount ? "rgba(0, 0, 0, 0.274)" : "",
+        backgroundColor: wordID === wordCount ? "#fe6f276a" : "",
       }}
     >
       {word.text}

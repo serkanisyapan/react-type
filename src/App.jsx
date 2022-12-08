@@ -47,6 +47,7 @@ export const App = () => {
       checkIsWordCorrect(userInput, words, wordCount);
     }
     if (event.key === "Backspace") {
+      if (keyStrokes === 0) return;
       setKeyStrokes(keyStrokes - 1);
     } else {
       setKeyStrokes(keyStrokes + 1);
@@ -57,13 +58,6 @@ export const App = () => {
     setUserInput(event.target.value);
     setIsGameStarted(true);
     setResetTimer(false);
-  };
-
-  const checkIsGameOver = () => {
-    if (wordCount === 30) {
-      setIsGameStarted(false);
-      setIsGameOver(true);
-    }
   };
 
   const typedWordCount = `${wordCount}/${words.length}`;
@@ -84,7 +78,10 @@ export const App = () => {
   }, [allWords]);
 
   useEffect(() => {
-    checkIsGameOver();
+    if (wordCount === 10) {
+      setIsGameStarted(false);
+      setIsGameOver(true);
+    }
   }, [wordCount]);
 
   return (
@@ -119,6 +116,7 @@ export const App = () => {
           timerReset={resetTimer}
           calculateWPM={calculateWPM}
           keyStrokes={keyStrokes}
+          isGameOver={isGameOver}
         />
       </div>
       <button
