@@ -10,6 +10,7 @@ export const Timer = ({
 }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [WPM, setWPM] = useState(0);
   const timerInterval = useRef(null);
   const isBiggerThanNine = seconds > 9 ? null : 0;
 
@@ -30,7 +31,7 @@ export const Timer = ({
     clearInterval(timerInterval.current);
   };
 
-  const WPM = () => {
+  const newWPM = () => {
     if (seconds === 0) {
       return calculateWPM(keyStrokes, 1);
     } else {
@@ -39,20 +40,43 @@ export const Timer = ({
   };
 
   useEffect(() => {
+    setWPM(newWPM());
     if (isGameStarted) {
       newTimer();
     }
     if (isGameOver) {
+      localStorage.setItem(
+        "keyStrokes",
+        JSON.stringify(
+          JSON.parse(localStorage.getItem("keyStrokes") || "[]").concat([
+            keyStrokes,
+          ])
+        )
+      );
+      localStorage.setItem(
+        "time",
+        JSON.stringify(
+          JSON.parse(localStorage.getItem("time") || "[]").concat([seconds])
+        )
+      );
       clearInterval(timerInterval.current);
     }
     if (timerReset) {
+      if (WPM > 0) {
+        localStorage.setItem(
+          "WPM",
+          JSON.stringify(
+            JSON.parse(localStorage.getItem("WPM") || "[]").concat([WPM])
+          )
+        );
+      }
       resetTimer();
     }
   }, [seconds, isGameStarted, timerReset]);
 
   return (
     <p className={timerClass}>
-      <span>{WPM()} WPM</span>
+      <span>{WPM} WPM</span>
       <span style={{ marginLeft: "30px" }} className="minutes">
         0{minutes}
       </span>

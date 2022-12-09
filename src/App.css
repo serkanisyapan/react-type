@@ -73,7 +73,6 @@
 }
 
 .word-count-board {
-  align-self: start;
   font-family: Roboto Mono;
   font-size: 26px;
   color: #fe6f27;
@@ -111,9 +110,16 @@
 .scores {
   display: flex;
   align-items: center;
-  justify-content: center;
-  align-self: start;
+  justify-content: space-between;
   margin-bottom: 20px;
+  width: 100%;
+}
+
+.lastrun-text {
+  font-size: 20px;
+  font-family: Roboto Mono;
+  color: #fe6f27;
+  cursor: pointer;
 }
 
 .refresh-button:hover {
