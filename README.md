@@ -9,5 +9,5 @@ TODOS:
 - [x] Add counter for correct and false typed words
 - [x] Add timer
 - [x] Add wpm
-- [ ] Add score table for last 5-10 run attempts
+- [x] Add score table for last 5-10 run attempts
 - [ ] Add scrolling instead of showing all words at once
