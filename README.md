@@ -11,3 +11,5 @@ TODOS:
 - [x] Add wpm
 - [x] Add score table for last 5-10 run attempts
 - [ ] Add scrolling instead of showing all words at once
+
+Try here: http://react-type.surge.sh/
