@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { allWords } from "./words.js";
-import { pickRandom30Words } from "./utils/pickRandom30Words.js";
+import { pickRandomWords } from "./utils/pickRandomWords.js";
 import { checkWordColor } from "./utils/checkWordColor.js";
 import { calculateWPM } from "./utils/calculateWPM.js";
 import { Word } from "./components/Word.jsx";
@@ -14,7 +14,7 @@ export const App = () => {
   const [userInput, setUserInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [keyStrokes, setKeyStrokes] = useState(0);
-  const [showRestartTurn, setShowRestartTurn] = useState(false);
+  const [gameType, setGameType] = useState(30);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [resetTimer, setResetTimer] = useState(false);
@@ -70,30 +70,56 @@ export const App = () => {
     setIsGameOver(false);
     setResetTimer(true);
     setKeyStrokes(0);
-    setWords(pickRandom30Words(allWords));
+    setWords(pickRandomWords(allWords, gameType));
     focusRef.current.focus();
   };
 
-  const showLastRuns = () => setShowTable(true);
+  const handleGameType = (number) => {
+    setWords(pickRandomWords(allWords, number));
+    refreshTurn();
+  };
+
+  const showLastRuns = () => {
+    setShowTable(true);
+  };
   const hideLastRuns = () => setShowTable(false);
 
   useEffect(() => {
-    setWords(pickRandom30Words(allWords));
+    setWords(pickRandomWords(allWords, gameType));
     focusRef.current.focus();
   }, [allWords]);
 
   useEffect(() => {
-    if (wordCount === 30) {
+    if (wordCount === gameType) {
       setIsGameStarted(false);
       setIsGameOver(true);
     }
   }, [wordCount]);
+
+  useEffect(() => {
+    handleGameType(gameType);
+  }, [gameType]);
 
   return (
     <>
       <div className="type-container">
         <div className="scores">
           <span className="word-count-board">{typedWordCount}</span>
+          <span className="gametype">
+            <span
+              onClick={() => setGameType(30)}
+              style={{ color: gameType === 30 ? "#bc460a" : "" }}
+            >
+              30
+            </span>
+            |
+            <span
+              onClick={() => setGameType(50)}
+              style={{ color: gameType === 50 ? "#bc460a" : "" }}
+            >
+              50
+            </span>
+          </span>
           {showTable ? (
             <LastTurns hideLastRuns={hideLastRuns} />
           ) : (
@@ -132,15 +158,9 @@ export const App = () => {
             isGameOver={isGameOver}
           />
         </div>
-        <button
-          onMouseOver={() => setShowRestartTurn(true)}
-          onMouseOut={() => setShowRestartTurn(false)}
-          onClick={refreshTurn}
-          className="refresh-button"
-        >
+        <button onClick={refreshTurn} className="refresh-button">
           <img src={refreshImage} alt="new turn button" />
         </button>
-        {showRestartTurn && <div className="restart-text">New Run</div>}
       </div>
     </>
   );

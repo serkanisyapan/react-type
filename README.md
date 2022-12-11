@@ -11,5 +11,6 @@ TODOS:
 - [x] Add wpm
 - [x] Add score table for last 5-10 run attempts
 - [x] Add scrolling instead of showing all words at once
+- [ ] Let typer choose between 10-30-50 word runs
 
 Try here: http://react-type.surge.sh/

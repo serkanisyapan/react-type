@@ -1,6 +1,6 @@
-export const pickRandom30Words = (array) => {
+export const pickRandomWords = (array, number) => {
   let randomWords = [];
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < number; i++) {
     let pickWord = array[Math.floor(Math.random() * array.length)];
     randomWords.push(pickWord);
   }

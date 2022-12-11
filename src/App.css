@@ -83,16 +83,6 @@
   height: 30px;
 }
 
-.restart-text {
-  padding: 7px;
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.597);
-  color: white;
-  position: absolute;
-  left: 635px;
-  top: 500px;
-}
-
 .timer {
   font-size: 28px;
   color: #fe6f27;
@@ -110,7 +100,20 @@
 .lastrun-text {
   font-size: 20px;
   color: #fe6f27;
+}
+
+.gametype {
+  color: #fe6f27;
+  font-size: 18px;
+}
+
+.gametype:hover {
   cursor: pointer;
+}
+
+.lastrun-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .refresh-button:hover {
