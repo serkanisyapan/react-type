@@ -105,10 +105,9 @@
 .gametype {
   color: #fe6f27;
   font-size: 18px;
-}
-
-.gametype:hover {
   cursor: pointer;
+  display: flex;
+  gap: 5px;
 }
 
 .lastrun-text:hover {

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { getLocalStorage } from "../utils/getLocalStorage";
 
 export const Timer = ({
   isGameStarted,
@@ -45,32 +46,17 @@ export const Timer = ({
       newTimer();
     }
     if (isGameOver) {
-      localStorage.setItem(
-        "keyStrokes",
-        JSON.stringify(
-          JSON.parse(localStorage.getItem("keyStrokes") || "[]").concat([
-            keyStrokes,
-          ])
-        )
-      );
-      localStorage.setItem(
-        "time",
-        JSON.stringify(
-          JSON.parse(localStorage.getItem("time") || "[]").concat([seconds])
-        )
-      );
+      getLocalStorage("keyStrokes", keyStrokes);
+      getLocalStorage("time", seconds);
       clearInterval(timerInterval.current);
+      console.log(WPM);
     }
     if (timerReset) {
       if (WPM > 0) {
-        localStorage.setItem(
-          "WPM",
-          JSON.stringify(
-            JSON.parse(localStorage.getItem("WPM") || "[]").concat([WPM])
-          )
-        );
+        getLocalStorage("WPM", WPM);
       }
       resetTimer();
+      console.log(WPM);
     }
   }, [seconds, isGameStarted, timerReset]);
 

@@ -84,11 +84,13 @@ export const App = () => {
   };
   const hideLastRuns = () => setShowTable(false);
 
+  // on page load creates new run
   useEffect(() => {
     setWords(pickRandomWords(allWords, gameType));
     focusRef.current.focus();
-  }, [allWords]);
+  }, []);
 
+  // checks if game is over when user types a word
   useEffect(() => {
     if (wordCount === gameType) {
       setIsGameStarted(false);
@@ -96,6 +98,7 @@ export const App = () => {
     }
   }, [wordCount]);
 
+  // creates a new run when user changes game type
   useEffect(() => {
     handleGameType(gameType);
   }, [gameType]);
