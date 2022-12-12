@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@200;300;400;500;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -9,5 +10,5 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #2f2f2f;
-  font-family: "Poppins", sans-serif;
+  font-family: "Chivo Mono", sans-serif;
 }

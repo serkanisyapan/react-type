@@ -123,13 +123,11 @@ export const App = () => {
               50
             </span>
           </span>
-          {showTable ? (
-            <LastTurns hideLastRuns={hideLastRuns} />
-          ) : (
-            <p onClick={showLastRuns} className="lastrun-text">
-              Show Last Runs
-            </p>
-          )}
+          {showTable && <LastTurns hideLastRuns={hideLastRuns} />}
+
+          <p onClick={showLastRuns} className="lastrun-text">
+            Show Last Runs
+          </p>
         </div>
         <div className="word-container">
           {words.map((word, wordID) => (
