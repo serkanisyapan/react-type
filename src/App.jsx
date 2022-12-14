@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { allWords } from "./words.js";
 import { pickRandomWords } from "./utils/pickRandomWords.js";
-import { checkWordColor } from "./utils/checkWordColor.js";
 import { calculateWPM } from "./utils/calculateWPM.js";
 import { Word } from "./components/Word.jsx";
 import { Timer } from "./components/Timer.jsx";
 import { LastTurns } from "./components/LastTurns.jsx";
-import refreshImage from "./assets/refresh-image.png";
+import newTurnLogo from "./assets/new-turn-button.svg";
 import "./App.css";
 
 export const App = () => {
@@ -64,7 +63,7 @@ export const App = () => {
 
   const typedWordCount = `${wordCount}/${words.length}`;
 
-  const refreshTurn = () => {
+  const newTurn = () => {
     setWordCount(0);
     setUserInput("");
     setIsGameOver(false);
@@ -76,7 +75,7 @@ export const App = () => {
 
   const handleGameType = (number) => {
     setWords(pickRandomWords(allWords, number));
-    refreshTurn();
+    newTurn();
   };
 
   const showLastRuns = () => {
@@ -111,14 +110,14 @@ export const App = () => {
           <span className="gametype">
             <span
               onClick={() => setGameType(30)}
-              style={{ color: gameType === 30 ? "#bc460a" : "" }}
+              style={{ color: gameType === 30 ? "#fee7158a" : "" }}
             >
               30
             </span>
             |
             <span
               onClick={() => setGameType(50)}
-              style={{ color: gameType === 50 ? "#bc460a" : "" }}
+              style={{ color: gameType === 50 ? "#fee7158a" : "" }}
             >
               50
             </span>
@@ -134,10 +133,9 @@ export const App = () => {
             <Word
               key={wordID}
               word={word}
-              wordClass="words"
               wordID={wordID}
               wordCount={wordCount}
-              checkWordColor={checkWordColor}
+              typerInput={userInput}
             />
           ))}
         </div>
@@ -159,8 +157,8 @@ export const App = () => {
             isGameOver={isGameOver}
           />
         </div>
-        <button onClick={refreshTurn} className="refresh-button">
-          <img src={refreshImage} alt="new turn button" />
+        <button onClick={newTurn} className="refresh-button">
+          <img src={newTurnLogo} alt="new turn button" />
         </button>
       </div>
     </>

@@ -1,11 +1,8 @@
 import { useRef, useEffect } from "react";
-export const Word = ({
-  word,
-  wordClass,
-  wordID,
-  wordCount,
-  checkWordColor,
-}) => {
+import { checkWordColor } from "../utils/checkWordColor";
+import "./Word.css";
+
+export const Word = ({ word, wordID, wordCount, typerInput }) => {
   const scrollToWord = useRef(null);
   const scrollIntoWord = () => {
     scrollToWord.current.scrollIntoView({ behavior: "smooth" });
@@ -13,7 +10,7 @@ export const Word = ({
 
   useEffect(() => {
     const backgroundColor = scrollToWord.current.style.backgroundColor;
-    if (backgroundColor === "rgba(254, 111, 39, 0.416)") {
+    if (backgroundColor === "rgba(0, 0, 0, 0.01)") {
       scrollIntoWord();
     }
   });
@@ -21,16 +18,26 @@ export const Word = ({
   return (
     <span
       ref={scrollToWord}
-      onClick={(event) => console.log(event.target.getBoundingClientRect())}
-      className={wordClass}
+      className="words"
       style={{
         color: checkWordColor(word),
-        backgroundColor:
-          wordID === wordCount ? "rgba(254, 111, 39, 0.416)" : "",
-        transition: "all 500ms",
+        backgroundColor: wordID === wordCount ? "rgba(0, 0, 0, 0.01)" : "",
       }}
     >
-      {word.text}
+      {word.text.split("").map((letter, letterID) => (
+        <span
+          className="letters"
+          style={{
+            background:
+              wordID === wordCount && typerInput.length === letterID
+                ? "#fee71590"
+                : "",
+          }}
+          key={letterID}
+        >
+          {letter}
+        </span>
+      ))}
     </span>
   );
 };
