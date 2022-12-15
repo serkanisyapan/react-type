@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { checkWordColor } from "../utils/checkWordColor";
+import { checkLetterColor } from "../utils/checkLetterColor";
 import "./Word.css";
 
 export const Word = ({ word, wordID, wordCount, typerInput }) => {
@@ -28,6 +29,13 @@ export const Word = ({ word, wordID, wordCount, typerInput }) => {
         <span
           className="letters"
           style={{
+            color: checkLetterColor(
+              typerInput,
+              wordCount,
+              word,
+              letterID,
+              wordID
+            ),
             background:
               wordID === wordCount && typerInput.length === letterID
                 ? "#fee71590"

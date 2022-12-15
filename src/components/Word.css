@@ -5,3 +5,8 @@
   margin-right: 10px;
   font-weight: 500;
 }
+
+.letters {
+  transition: background 0.2s;
+  transition-property: background;
+}
