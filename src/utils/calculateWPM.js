@@ -1,4 +1,4 @@
-export const calculateWPM = (keyStrokes, time) => {
-  const WPM = Math.floor((keyStrokes / 5) * (60 / time));
+export const calculateWPM = (keyStrokes, seconds, wrongLetters) => {
+  const WPM = Math.floor((keyStrokes / 5 - wrongLetters) * (60 / seconds));
   return WPM;
 };

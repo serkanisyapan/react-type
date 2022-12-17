@@ -7,6 +7,5 @@
 }
 
 .letters {
-  transition: background 0.2s;
-  transition-property: background;
+  transition: all 0.2s ease;
 }

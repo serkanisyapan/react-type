@@ -14,6 +14,7 @@ export const App = () => {
   const [wordCount, setWordCount] = useState(0);
   const [keyStrokes, setKeyStrokes] = useState(0);
   const [gameType, setGameType] = useState(30);
+  const [wrongLetters, setWrongLetters] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [resetTimer, setResetTimer] = useState(false);
@@ -42,11 +43,23 @@ export const App = () => {
     setUserInput("");
   };
 
+  const checkIsLettersCorrect = (input, array, count) => {
+    let typedValue = input.slice("");
+    let typedWord = array[count].text.slice("");
+    for (let i = 0; i < typedWord.length; i++) {
+      if (typedValue[i] && typedValue[i] !== typedWord[i]) {
+        setWrongLetters((prev) => prev + 1);
+      }
+    }
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === " " && userInput.trim().length > 0) {
       event.preventDefault();
       checkIsWordCorrect(userInput, words, wordCount);
+      checkIsLettersCorrect(userInput, words, wordCount);
     }
+
     if (event.key === "Backspace") {
       if (keyStrokes === 0) return;
       setKeyStrokes(keyStrokes - 1);
@@ -55,20 +68,24 @@ export const App = () => {
     }
   };
 
+  // when typer starts typing timer starts
   const handleOnChange = (event) => {
     setUserInput(event.target.value);
     setIsGameStarted(true);
     setResetTimer(false);
   };
 
+  // keeps track of how many word typed
   const typedWordCount = `${wordCount}/${words.length}`;
 
+  // sets everything back to initial load
   const newTurn = () => {
     setWordCount(0);
     setUserInput("");
     setIsGameOver(false);
     setResetTimer(true);
     setKeyStrokes(0);
+    setWrongLetters(0);
     setWords(pickRandomWords(allWords, gameType));
     focusRef.current.focus();
   };
@@ -155,6 +172,7 @@ export const App = () => {
             calculateWPM={calculateWPM}
             keyStrokes={keyStrokes}
             isGameOver={isGameOver}
+            wrongLetters={wrongLetters}
           />
         </div>
         <button onClick={newTurn} className="refresh-button">

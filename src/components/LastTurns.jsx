@@ -20,7 +20,7 @@ export const LastTurns = ({ hideLastRuns }) => {
     modalContent = (
       <>
         <div className="table-columns">
-          <span className="header">Raw WPM</span>
+          <span className="header">Net WPM</span>
           {turnWPM.slice(-5).map((turn, turnID) => (
             <span key={turnID}>{turn}</span>
           ))}

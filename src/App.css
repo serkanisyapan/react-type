@@ -24,11 +24,6 @@
   overflow: hidden;
 }
 
-.word-container::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
 .word-input {
   border-radius: 2px;
   font-family: "Chivo Mono", sans-serif;

@@ -8,6 +8,7 @@ export const Timer = ({
   calculateWPM,
   keyStrokes,
   isGameOver,
+  wrongLetters,
 }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -34,9 +35,9 @@ export const Timer = ({
 
   const newWPM = () => {
     if (seconds === 0) {
-      return calculateWPM(keyStrokes, 1);
+      return calculateWPM(keyStrokes, 1, wrongLetters);
     } else {
-      return calculateWPM(keyStrokes, seconds);
+      return calculateWPM(keyStrokes, seconds, wrongLetters);
     }
   };
 
@@ -62,7 +63,7 @@ export const Timer = ({
 
   return (
     <p className={timerClass}>
-      <span>{WPM} WPM</span>
+      {WPM < 0 ? <span>0 WPM</span> : <span>{WPM} WPM</span>}
       <span style={{ marginLeft: "30px" }} className="minutes">
         0{minutes}
       </span>

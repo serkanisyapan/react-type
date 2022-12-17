@@ -3,16 +3,13 @@ import { checkWordColor } from "../utils/checkWordColor";
 import { checkLetterColor } from "../utils/checkLetterColor";
 import "./Word.css";
 
-export const Word = ({ word, wordID, wordCount, typerInput }) => {
+export const Word = ({ word, wordID, wordCount, typerInput, handleFollow }) => {
   const scrollToWord = useRef(null);
-  const scrollIntoWord = () => {
-    scrollToWord.current.scrollIntoView({ behavior: "smooth" });
-  };
 
   useEffect(() => {
     const backgroundColor = scrollToWord.current.style.backgroundColor;
     if (backgroundColor === "rgba(0, 0, 0, 0.01)") {
-      scrollIntoWord();
+      scrollToWord.current.scrollIntoView({ behavior: "smooth" });
     }
   });
 
@@ -36,9 +33,9 @@ export const Word = ({ word, wordID, wordCount, typerInput }) => {
               letterID,
               wordID
             ),
-            background:
+            backgroundColor:
               wordID === wordCount && typerInput.length === letterID
-                ? "#fee71590"
+                ? "rgba(254, 231, 21, 0.565)"
                 : "",
           }}
           key={letterID}
