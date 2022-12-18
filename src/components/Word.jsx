@@ -3,7 +3,7 @@ import { checkWordColor } from "../utils/checkWordColor";
 import { checkLetterColor } from "../utils/checkLetterColor";
 import "./Word.css";
 
-export const Word = ({ word, wordID, wordCount, typerInput, handleFollow }) => {
+export const Word = ({ word, wordID, wordCount, typerInput }) => {
   const scrollToWord = useRef(null);
 
   useEffect(() => {

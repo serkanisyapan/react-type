@@ -50,14 +50,12 @@ export const Timer = ({
       getLocalStorage("keyStrokes", keyStrokes);
       getLocalStorage("time", seconds);
       clearInterval(timerInterval.current);
-      console.log(WPM);
     }
     if (timerReset) {
       if (WPM > 0) {
         getLocalStorage("WPM", WPM);
       }
       resetTimer();
-      console.log(WPM);
     }
   }, [seconds, isGameStarted, timerReset]);
 

@@ -39,7 +39,7 @@ export const App = () => {
       });
       setWords(changedWords);
     }
-    setWordCount(wordCount + 1);
+    setWordCount((prev) => prev + 1);
     setUserInput("");
   };
 
@@ -50,6 +50,11 @@ export const App = () => {
       if (typedValue[i] && typedValue[i] !== typedWord[i]) {
         setWrongLetters((prev) => prev + 1);
       }
+    }
+    if (typedValue.length > typedWord.length) {
+      let extraWords = typedValue.slice(typedWord.length).length;
+      setKeyStrokes((prev) => prev - extraWords);
+      console.log(extraWords);
     }
   };
 
@@ -62,9 +67,9 @@ export const App = () => {
 
     if (event.key === "Backspace") {
       if (keyStrokes === 0) return;
-      setKeyStrokes(keyStrokes - 1);
+      setKeyStrokes((prev) => prev - 1);
     } else {
-      setKeyStrokes(keyStrokes + 1);
+      setKeyStrokes((prev) => prev + 1);
     }
   };
 
