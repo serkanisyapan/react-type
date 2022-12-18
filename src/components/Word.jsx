@@ -3,15 +3,20 @@ import { checkWordColor } from "../utils/checkWordColor";
 import { checkLetterColor } from "../utils/checkLetterColor";
 import "./Word.css";
 
-export const Word = ({ word, wordID, wordCount, typerInput }) => {
+export const Word = ({ word, wordID, wordCount, wordHighlighter }) => {
   const scrollToWord = useRef(null);
 
   useEffect(() => {
     const backgroundColor = scrollToWord.current.style.backgroundColor;
     if (backgroundColor === "rgba(0, 0, 0, 0.01)") {
-      scrollToWord.current.scrollIntoView({ behavior: "smooth" });
+      scrollToWord.current.scrollIntoView({
+        behavior: "smooth",
+      });
+      let { top, left, width, height } =
+        scrollToWord.current.getBoundingClientRect();
+      wordHighlighter(top, left, width, height);
     }
-  });
+  }, [wordCount, word]);
 
   return (
     <span
@@ -22,27 +27,7 @@ export const Word = ({ word, wordID, wordCount, typerInput }) => {
         backgroundColor: wordID === wordCount ? "rgba(0, 0, 0, 0.01)" : "",
       }}
     >
-      {word.text.split("").map((letter, letterID) => (
-        <span
-          className="letters"
-          style={{
-            color: checkLetterColor(
-              typerInput,
-              wordCount,
-              word,
-              letterID,
-              wordID
-            ),
-            backgroundColor:
-              wordID === wordCount && typerInput.length === letterID
-                ? "rgba(254, 231, 21, 0.565)"
-                : "",
-          }}
-          key={letterID}
-        >
-          {letter}
-        </span>
-      ))}
+      {word.text}
     </span>
   );
 };

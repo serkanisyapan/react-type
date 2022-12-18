@@ -15,11 +15,13 @@ export const App = () => {
   const [keyStrokes, setKeyStrokes] = useState(0);
   const [gameType, setGameType] = useState(30);
   const [wrongLetters, setWrongLetters] = useState(0);
+  const [highlighter, setHighlighter] = useState({});
   const [isGameOver, setIsGameOver] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [resetTimer, setResetTimer] = useState(false);
   const [showTable, setShowTable] = useState(false);
   const focusRef = useRef(null);
+  const scrollRef = useRef(null);
 
   const checkIsWordCorrect = (input, array, count) => {
     if (input === array[count].text) {
@@ -43,6 +45,10 @@ export const App = () => {
     setUserInput("");
   };
 
+  const highlighterPosition = (top, left, width, height, scrollY) => {
+    setHighlighter({ top, left, width, height, scrollY });
+  };
+
   const checkIsLettersCorrect = (input, array, count) => {
     let typedValue = input.slice("");
     let typedWord = array[count].text.slice("");
@@ -54,7 +60,6 @@ export const App = () => {
     if (typedValue.length > typedWord.length) {
       let extraWords = typedValue.slice(typedWord.length).length;
       setKeyStrokes((prev) => prev - extraWords);
-      console.log(extraWords);
     }
   };
 
@@ -150,14 +155,25 @@ export const App = () => {
             Show Last Runs
           </p>
         </div>
-        <div className="word-container">
+        <div ref={scrollRef} className="word-container">
+          <div
+            style={{
+              top: highlighter.top + "px",
+              left: highlighter.left + "px",
+              height: highlighter.height + "px",
+              width: highlighter.width + "px",
+              position: "absolute",
+              backgroundColor: "rgba(255, 228, 23, 0.404)",
+              transition: "all 0.2s ease-in-out",
+            }}
+          ></div>
           {words.map((word, wordID) => (
             <Word
               key={wordID}
               word={word}
               wordID={wordID}
               wordCount={wordCount}
-              typerInput={userInput}
+              wordHighlighter={highlighterPosition}
             />
           ))}
         </div>
