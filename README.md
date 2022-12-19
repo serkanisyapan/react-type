@@ -12,6 +12,6 @@ TODOS:
 - [x] Add score table for last 5-10 run attempts
 - [x] Add scrolling instead of showing all words at once
 - [x] Let typer choose between 30-50 word runs
-- [ ] Add scrolling with better higlighter
+- [x] Add scrolling with better higlighter
 
-Try here: http://react-type.surge.sh/
+Try here: https://react-type.netlify.app/
