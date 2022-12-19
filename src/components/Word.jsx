@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
+import { flushSync } from "react-dom";
 import { checkWordColor } from "../utils/checkWordColor";
-import { checkLetterColor } from "../utils/checkLetterColor";
 import "./Word.css";
 
 export const Word = ({ word, wordID, wordCount, wordHighlighter }) => {
@@ -12,8 +12,10 @@ export const Word = ({ word, wordID, wordCount, wordHighlighter }) => {
       scrollToWord.current.scrollIntoView({
         behavior: "smooth",
       });
-      let { top, left, width, height } =
-        scrollToWord.current.getBoundingClientRect();
+      let top = scrollToWord.current.offsetTop;
+      let left = scrollToWord.current.offsetLeft;
+      let width = scrollToWord.current.offsetWidth;
+      let height = scrollToWord.current.offsetHeight;
       wordHighlighter(top, left, width, height);
     }
   }, [wordCount, word]);
