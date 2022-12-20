@@ -6,7 +6,7 @@ export const LastTurns = ({ hideLastRuns }) => {
     JSON.parse(localStorage.getItem("WPM"))
   );
   const [turnChars, setTurnChars] = useState(
-    JSON.parse(localStorage.getItem("keyStrokes"))
+    JSON.parse(localStorage.getItem("characters"))
   );
   const [turnTimes, setTurnTimes] = useState(
     JSON.parse(localStorage.getItem("time"))
@@ -34,7 +34,10 @@ export const LastTurns = ({ hideLastRuns }) => {
         <div className="table-columns">
           <span className="header">Total Chars</span>
           {turnChars.slice(-5).map((turnChar, charsID) => (
-            <span key={charsID}>{turnChar}</span>
+            <span key={charsID}>
+              <span>{turnChar.keyStrokes}</span>/
+              <span style={{ color: "#D2001a" }}>{turnChar.wrongLetters}</span>
+            </span>
           ))}
         </div>
       </>

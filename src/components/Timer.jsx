@@ -47,7 +47,14 @@ export const Timer = ({
       newTimer();
     }
     if (isGameOver) {
-      getLocalStorage("keyStrokes", keyStrokes);
+      localStorage.setItem(
+        "characters",
+        JSON.stringify(
+          JSON.parse(localStorage.getItem("characters") || "[]").concat([
+            { keyStrokes, wrongLetters },
+          ])
+        )
+      );
       getLocalStorage("time", seconds);
       clearInterval(timerInterval.current);
     }
@@ -57,7 +64,7 @@ export const Timer = ({
       }
       resetTimer();
     }
-  }, [seconds, isGameStarted, timerReset]);
+  }, [seconds, isGameOver, isGameStarted, timerReset]);
 
   return (
     <p className={timerClass}>
