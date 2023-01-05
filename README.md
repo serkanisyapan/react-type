@@ -1,4 +1,5 @@
-Fast typing test to see how fast you can type
+## Fast typing test to see how fast you can type
+## Try here: https://react-type.netlify.app/
 
 TODOS:
 
@@ -14,4 +15,4 @@ TODOS:
 - [x] Let typer choose between 30-50 word runs
 - [x] Add scrolling with better higlighter
 
-Try here: https://react-type.netlify.app/
+
