@@ -106,9 +106,8 @@ export const App = () => {
   };
 
   const showLastRuns = () => {
-    setShowTable(true);
+    setShowTable(!showTable);
   };
-  const hideLastRuns = () => setShowTable(false);
 
   // on page load creates new run
   useEffect(() => {
@@ -149,7 +148,7 @@ export const App = () => {
               50
             </span>
           </span>
-          {showTable && <LastTurns hideLastRuns={hideLastRuns} />}
+          {showTable && <LastTurns showLastRuns={showLastRuns} />}
 
           <p onClick={showLastRuns} className="lastrun-text">
             Show Last Runs
