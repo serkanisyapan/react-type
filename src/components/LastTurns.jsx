@@ -1,21 +1,16 @@
-import { useState } from "react";
 import "./LastTurns.css";
 
 export const LastTurns = ({ showLastRuns }) => {
-  const turnWPM = JSON.parse(localStorage.getItem("WPM"));
-  const turnChars = JSON.parse(localStorage.getItem("characters"));
-  const turnTimes = JSON.parse(localStorage.getItem("time"));
+  const lastRurns = JSON.parse(localStorage.getItem("lastRuns"));
 
   const deleteLocalStorage = () => {
-    localStorage.removeItem("characters");
-    localStorage.removeItem("time");
-    localStorage.removeItem("WPM");
+    localStorage.removeItem("lastRuns");
     showLastRuns();
   };
 
   let modalContent;
 
-  if (!turnWPM || !turnChars || !turnTimes) {
+  if (!lastRurns) {
     modalContent = <p className="no-turn">No turns in the record</p>;
   } else {
     modalContent = (
@@ -23,19 +18,19 @@ export const LastTurns = ({ showLastRuns }) => {
         <div className="table">
           <div className="table-columns">
             <span className="header">Net WPM</span>
-            {turnWPM.slice(-5).map((turn, turnID) => (
-              <span key={turnID}>{turn}</span>
+            {lastRurns.slice(-5).map((turn, turnID) => (
+              <span key={turnID}>{turn.WPM}</span>
             ))}
           </div>
           <div className="table-columns">
             <span className="header">Time</span>
-            {turnTimes.slice(-5).map((turnTime, timeID) => (
-              <span key={timeID}>00:{turnTime}</span>
+            {lastRurns.slice(-5).map((turnTime, timeID) => (
+              <span key={timeID}>00:{turnTime.seconds}</span>
             ))}
           </div>
           <div className="table-columns">
             <span className="header">Total Chars</span>
-            {turnChars.slice(-5).map((turnChar, charsID) => (
+            {lastRurns.slice(-5).map((turnChar, charsID) => (
               <span key={charsID}>
                 <span>{turnChar.keyStrokes}</span>/
                 <span style={{ color: "#D2001a" }}>

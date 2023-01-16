@@ -51,16 +51,7 @@ export const Timer = ({
       newTimer();
     }
     if (isGameOver) {
-      localStorage.setItem(
-        "characters",
-        JSON.stringify(
-          JSON.parse(localStorage.getItem("characters") || "[]").concat([
-            { keyStrokes, wrongLetters },
-          ])
-        )
-      );
-      getLocalStorage("time", seconds);
-      getLocalStorage("WPM", WPM);
+      getLocalStorage("lastRuns", { keyStrokes, wrongLetters, seconds, WPM });
       clearInterval(timerInterval.current);
     }
     if (timerReset) {

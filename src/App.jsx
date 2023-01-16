@@ -39,10 +39,6 @@ export const App = () => {
     setUserInput("");
   };
 
-  const highlighterPosition = (top, left, width, height, scrollY) => {
-    setHighlighter({ top, left, width, height, scrollY });
-  };
-
   const checkIsLettersCorrect = (input, array, count) => {
     let typedValue = input.slice("");
     let typedWord = array[count].text.slice("");
@@ -83,9 +79,6 @@ export const App = () => {
     setResetTimer(false);
   };
 
-  // keeps track of how many word typed
-  const typedWordCount = `${wordCount}/${words.length}`;
-
   // sets everything back to initial load
   const newTurn = () => {
     setWordCount(0);
@@ -106,6 +99,13 @@ export const App = () => {
   const showLastRuns = () => {
     setShowTable(!showTable);
   };
+
+  const highlighterPosition = (top, left, width, height, scrollY) => {
+    setHighlighter({ top, left, width, height, scrollY });
+  };
+
+  // keeps track of how many word typed
+  const typedWordCount = `${wordCount}/${words.length}`;
 
   // on page load creates new run
   useEffect(() => {
