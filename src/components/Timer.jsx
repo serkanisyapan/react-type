@@ -55,9 +55,6 @@ export const Timer = ({
           ])
         )
       );
-      console.log(seconds);
-      console.log(WPM);
-      console.log(keyStrokes);
       getLocalStorage("time", seconds);
       clearInterval(timerInterval.current);
     }
