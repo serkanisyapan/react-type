@@ -19,7 +19,7 @@ export const Timer = ({
   const newTimer = () => {
     clearInterval(timerInterval.current);
     timerInterval.current = setInterval(() => {
-      setSeconds(seconds + 1);
+      setSeconds((prev) => prev + 1);
       if (seconds >= 59) {
         setSeconds(0);
         setMinutes(minutes + 1);
@@ -55,6 +55,9 @@ export const Timer = ({
           ])
         )
       );
+      console.log(seconds);
+      console.log(WPM);
+      console.log(keyStrokes);
       getLocalStorage("time", seconds);
       clearInterval(timerInterval.current);
     }

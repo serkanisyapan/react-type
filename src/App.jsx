@@ -24,23 +24,17 @@ export const App = () => {
   const scrollRef = useRef(null);
 
   const checkIsWordCorrect = (input, array, count) => {
-    if (input === array[count].text) {
-      const changedWords = array.map((item, itemID) => {
-        if (count === itemID) {
+    const changedWords = array.map((item, itemID) => {
+      if (count === itemID) {
+        if (input === array[count].text) {
           return { ...item, isCorrect: true };
-        }
-        return item;
-      });
-      setWords(changedWords);
-    } else {
-      const changedWords = array.map((item, itemID) => {
-        if (count === itemID) {
+        } else {
           return { ...item, isCorrect: false };
         }
-        return item;
-      });
-      setWords(changedWords);
-    }
+      }
+      return item;
+    });
+    setWords(changedWords);
     setWordCount((prev) => prev + 1);
     setUserInput("");
   };
@@ -64,7 +58,11 @@ export const App = () => {
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === " " && userInput.trim().length > 0) {
+    if (
+      event.keyCode === 32 ||
+      event.key === " " ||
+      (event.code === "Space" && userInput.trim().length > 0)
+    ) {
       event.preventDefault();
       checkIsWordCorrect(userInput, words, wordCount);
       checkIsLettersCorrect(userInput, words, wordCount);
