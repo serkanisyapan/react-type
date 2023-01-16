@@ -42,7 +42,11 @@ export const Timer = ({
   };
 
   useEffect(() => {
-    setWPM(newWPM());
+    const getWPM = newWPM();
+    setWPM(getWPM);
+  }, [seconds]);
+
+  useEffect(() => {
     if (isGameStarted) {
       newTimer();
     }
@@ -56,15 +60,13 @@ export const Timer = ({
         )
       );
       getLocalStorage("time", seconds);
+      getLocalStorage("WPM", WPM);
       clearInterval(timerInterval.current);
     }
     if (timerReset) {
-      if (WPM > 0) {
-        getLocalStorage("WPM", WPM);
-      }
       resetTimer();
     }
-  }, [seconds, isGameOver, isGameStarted, timerReset]);
+  }, [isGameOver, isGameStarted, timerReset]);
 
   return (
     <p className={timerClass}>
