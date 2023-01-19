@@ -1,4 +1,4 @@
-import "./LastTurns.css";
+import "../styles/LastTurns.css";
 
 export const LastTurns = ({ showLastRuns }) => {
   const lastRurns = JSON.parse(localStorage.getItem("lastRuns"));

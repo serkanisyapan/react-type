@@ -66,11 +66,6 @@
   height: 30px;
 }
 
-.timer {
-  font-size: 28px;
-  margin-left: 25px;
-}
-
 .scores {
   display: flex;
   align-items: center;

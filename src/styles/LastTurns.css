@@ -57,6 +57,7 @@
   align-self: flex-start;
   cursor: pointer;
   font-size: 14px;
+  color: #ffe715ff;
 }
 
 @keyframes slide-down {

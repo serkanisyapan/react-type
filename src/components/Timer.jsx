@@ -1,34 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import { getLocalStorage } from "../utils/getLocalStorage";
+import "../styles/Timer.css";
 
 export const Timer = ({
-  isGameStarted,
-  timerReset,
-  timerClass,
   calculateWPM,
   keyStrokes,
-  isGameOver,
   wrongLetters,
+  gameState,
 }) => {
-  const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [WPM, setWPM] = useState(0);
   const timerInterval = useRef(null);
   const isBiggerThanNine = seconds > 9 ? null : 0;
+  const { isGameOver, isGameStarted, timerReset } = gameState;
 
   const newTimer = () => {
     clearInterval(timerInterval.current);
     timerInterval.current = setInterval(() => {
       setSeconds((prev) => prev + 1);
-      if (seconds >= 59) {
-        setSeconds(0);
-        setMinutes(minutes + 1);
-      }
     }, 1000);
   };
 
   const resetTimer = () => {
-    setMinutes(0);
     setSeconds(0);
     clearInterval(timerInterval.current);
   };
@@ -57,18 +50,14 @@ export const Timer = ({
     if (timerReset) {
       resetTimer();
     }
-  }, [isGameOver, isGameStarted, timerReset]);
+  }, [isGameOver, timerReset, isGameStarted]);
 
   return (
-    <p className={timerClass}>
+    <p className="timer">
       {WPM < 0 ? <span>0 WPM</span> : <span>{WPM} WPM</span>}
-      <span style={{ marginLeft: "30px" }} className="minutes">
-        0{minutes}
-      </span>
-      :
       <span className="seconds">
         {isBiggerThanNine}
-        {seconds}
+        {seconds}s
       </span>
     </p>
   );

@@ -1,7 +1,6 @@
 import { useRef, useEffect } from "react";
-import { flushSync } from "react-dom";
 import { checkWordColor } from "../utils/checkWordColor";
-import "./Word.css";
+import "../styles/Word.css";
 
 export const Word = ({ word, wordID, wordCount, wordHighlighter }) => {
   const scrollToWord = useRef(null);
