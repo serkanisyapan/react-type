@@ -48,22 +48,8 @@
   align-items: center;
 }
 
-.refresh-button {
-  margin-top: 35px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
-  display: flex;
-}
-
 .word-count-board {
   font-size: 26px;
-}
-
-.refresh-button img {
-  width: 30px;
-  height: 30px;
 }
 
 .scores {
@@ -88,8 +74,4 @@
 .lastrun-text:hover {
   cursor: pointer;
   text-decoration: underline;
-}
-
-.refresh-button:hover {
-  transform: rotate(360deg);
 }

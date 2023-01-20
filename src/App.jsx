@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { allWords } from "./words.js";
-import { pickRandomWords } from "./utils/pickRandomWords.js";
-import { calculateWPM } from "./utils/calculateWPM.js";
 import { Word } from "./components/Word.jsx";
 import { Timer } from "./components/Timer.jsx";
 import { LastTurns } from "./components/LastTurns.jsx";
 import { Highlighter } from "./components/Highlighter.jsx";
-import newTurnLogo from "./assets/new-turn-button.svg";
+import { NewRunButton } from "./components/NewRunButton.jsx";
+import { allWords } from "./words.js";
+import { pickRandomWords } from "./utils/pickRandomWords.js";
+import { calculateWPM } from "./utils/calculateWPM.js";
 import "./styles/App.css";
 
 export const App = () => {
@@ -73,6 +73,11 @@ export const App = () => {
     } else {
       setKeyStrokes((prev) => prev + 1);
     }
+
+    if (event.ctrlKey && event.key === "r") {
+      event.preventDefault();
+      newRun();
+    }
   };
 
   // when typer starts typing timer starts
@@ -84,7 +89,7 @@ export const App = () => {
   };
 
   // sets everything back to initial load
-  const newTurn = () => {
+  const newRun = () => {
     setWordCount(0);
     setUserInput("");
     setGameState({ isGameStarted: false, isGameOver: false, timerReset: true });
@@ -96,7 +101,7 @@ export const App = () => {
 
   const handleGameType = (number) => {
     setWords(pickRandomWords(allWords, number));
-    newTurn();
+    newRun();
   };
 
   const showLastRuns = () => {
@@ -190,9 +195,7 @@ export const App = () => {
             wrongLetters={wrongLetters}
           />
         </div>
-        <button onClick={() => newTurn()} className="refresh-button">
-          <img src={newTurnLogo} alt="new turn button" />
-        </button>
+        <NewRunButton newRun={newRun} />
       </div>
     </>
   );
