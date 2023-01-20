@@ -489,7 +489,7 @@ export const allWords = [
   { text: "alter", isCorrect: null },
   { text: "among", isCorrect: null },
   { text: "anger", isCorrect: null },
-  { text: "Angle", isCorrect: null },
+  { text: "angle", isCorrect: null },
   { text: "angry", isCorrect: null },
   { text: "apart", isCorrect: null },
   { text: "apple", isCorrect: null },
